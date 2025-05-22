@@ -41,3 +41,36 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface NavbarProps {
+    active: string;
+}
+
+export interface NavlinkProps {
+    isActive: boolean;
+    href: string;
+    title: string;
+}
+
+export interface NavbodyProps {
+    children: React.ReactNode;
+    isOpen: boolean;
+}
+
+export interface NavbtnProps {
+    isOpen: boolean;
+    onClick: () => void;
+}
+
+export interface KepengurusanHeaderProps {
+    title: string;
+    description: string;
+}
+
+export interface KepengurusanCardProps {
+    name: string;
+    position: string;
+    image: string;
+    href: string;
+    username: string;
+}
