@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\Jabatan;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -18,10 +20,43 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nama',
+        'alamat',
+        'telepon',
         'email',
+        'jenis_kelamin',
+        'status',
+        'role',
+        'id_jabatan',
+        'id_seksi',
+        'koordinator',
         'password',
     ];
+
+    public function isSuperAdmin()
+    {
+        return $this->role === 'superadmin';
+    }
+
+    public function isAnggota()
+    {
+        return $this->role === 'anggota';
+    }
+
+    public function isKoordinator()
+    {
+        return $this->koordinator === True;
+    }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'id_jabatan', 'id_jabatan');
+    }
+
+    public function seksi()
+    {
+        return $this->belongsTo(Seksi::class, 'id_seksi', 'id_seksi');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

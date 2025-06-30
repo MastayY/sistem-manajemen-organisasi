@@ -12,14 +12,19 @@ export interface BreadcrumbItem {
 
 export interface NavGroup {
     title: string;
-    items: NavItem[];
+    items: Array<{
+        items: any;
+        title: string;
+        url: string;
+        icon: React.ComponentType;
+    }>;
 }
 
 export interface NavItem {
     title: string;
-    href: string;
-    icon?: LucideIcon | null;
-    isActive?: boolean;
+    url: string; // Changed from `href` to `url` to match the provided structure
+    icon?: LucideIcon;
+    [key: string]: unknown; // This allows for additional properties...
 }
 
 export interface SharedData {
@@ -33,7 +38,7 @@ export interface SharedData {
 
 export interface User {
     id: number;
-    name: string;
+    nama: string;
     email: string;
     avatar?: string;
     email_verified_at: string | null;
@@ -73,4 +78,43 @@ export interface KepengurusanCardProps {
     image: string;
     href: string;
     username: string;
+}
+export interface PengumumanProps {
+    pengumuman: {
+        id: number;
+        judul: string;
+        tanggal: string;
+        lokasi: string;
+        pembuat: {
+            alamat: string;
+            created_at: string;
+            email: string;
+            email_verified_at: string | null;
+            id: number;
+            id_jabatan: number;
+            id_seksi: number | null;
+            jenis_kelamin: string;
+            koordinator: boolean;
+            nama: string;
+            role: string;
+            status: 'Aktif' | 'Non-aktif';
+            telepon: string;
+            updated_at: string;
+        };
+        isi: string;
+        status: 'active' | 'archived' | 'draft';
+        dikirim_wa: boolean;
+        penerima: number;
+    }[];
+    anggota: {
+        id: number;
+        nama: string;
+        alamat: string;
+        telepon: string;
+        email: string;
+        jenis_kelamin: string;
+        status: string;
+        role: string;
+        jabatan: any;
+    }[];
 }

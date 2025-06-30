@@ -13,8 +13,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nama');
+            $table->text('alamat');
+            $table->string('telepon');
             $table->string('email')->unique();
+            $table->string('jenis_kelamin');
+            $table->string('status'); // "Aktif/Tidak Aktif"
+            $table->string('role')->default('anggota'); // role: superadmin, anggota
+            $table->foreignId('id_jabatan')->nullable()->constrained('jabatans', 'id_jabatan')->nullOnDelete();
+            $table->foreignId('id_seksi')->nullable()->constrained('seksis', 'id_seksi')->nullOnDelete();
+            $table->boolean('koordinator')->default(false); // true jika anggota adalah koordinator seksi
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
