@@ -347,7 +347,7 @@ const Agenda = ({ kegiatan }: any) => {
                                                         </AlertDialogHeader>
                                                         <AlertDialogFooter>
                                                             <AlertDialogCancel>Batal</AlertDialogCancel>
-                                                            <AlertDialogAction onClick={() => handleDelete(agenda.id_kegiatan)}>
+                                                            <AlertDialogAction className='bg-red-600 hover:bg-red-700 text-white' onClick={() => handleDelete(agenda.id_kegiatan)}>
                                                                 Ya, Hapus
                                                             </AlertDialogAction>
                                                         </AlertDialogFooter>

@@ -277,7 +277,7 @@ const Pengumuman = ({ pengumuman, anggota }: PengumumanProps) => {
                                                                 </AlertDialogHeader>
                                                                 <AlertDialogFooter>
                                                                     <AlertDialogCancel>Batal</AlertDialogCancel>
-                                                                    <AlertDialogAction onClick={() => handleDelete(pengumuman.id_pengumuman)}>
+                                                                    <AlertDialogAction className='bg-red-600 hover:bg-red-700 text-white' onClick={() => handleDelete(pengumuman.id_pengumuman)}>
                                                                         Ya, Hapus
                                                                     </AlertDialogAction>
                                                                 </AlertDialogFooter>

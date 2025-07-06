@@ -7,6 +7,10 @@ use App\Http\Controllers\Dashboard\PengumumanController;
 use App\Http\Controllers\Dashboard\AnggotaController;
 use App\Http\Controllers\Dashboard\ArtikelBeritaController;
 use App\Http\Controllers\Dashboard\KeuanganController;
+use App\Http\Controllers\Dashboard\DokumenController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\InventarisController;
+
 use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\ArtikelBeritaLandingController;
 
@@ -26,7 +30,7 @@ Route::get('/kontak', function () {
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', [App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('dashboard/agenda', [KegiatanController::class, 'index'])->name('dashboard.agenda');
     Route::get('dashboard/agenda/create', [KegiatanController::class, 'create'])->name('dashboard.agenda.create');
@@ -55,24 +59,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('dashboard/anggota/{id}', [AnggotaController::class, 'update'])->name('dashboard.anggota.update');
     Route::delete('dashboard/anggota/{id}', [AnggotaController::class, 'destroy'])->name('dashboard.anggota.destroy');
 
-    Route::get('dashboard/keuangan', [App\Http\Controllers\Dashboard\KeuanganController::class, 'index'])->name('dashboard.keuangan');
-    Route::post('dashboard/keuangan', [App\Http\Controllers\Dashboard\KeuanganController::class, 'store'])->name('dashboard.keuangan.store');
-    Route::put('dashboard/keuangan/{id}', [App\Http\Controllers\Dashboard\KeuanganController::class, 'update'])->name('dashboard.keuangan.update');
-    Route::delete('dashboard/keuangan/{id}', [App\Http\Controllers\Dashboard\KeuanganController::class, 'destroy'])->name('dashboard.keuangan.destroy');
-    Route::get('dashboard/keuangan/{id}', [App\Http\Controllers\Dashboard\KeuanganController::class, 'show'])->name('dashboard.keuangan.show');
+    Route::get('dashboard/keuangan', [KeuanganController::class, 'index'])->name('dashboard.keuangan');
+    Route::post('dashboard/keuangan', [KeuanganController::class, 'store'])->name('dashboard.keuangan.store');
+    Route::put('dashboard/keuangan/{id}', [KeuanganController::class, 'update'])->name('dashboard.keuangan.update');
+    Route::delete('dashboard/keuangan/{id}', [KeuanganController::class, 'destroy'])->name('dashboard.keuangan.destroy');
+    Route::get('dashboard/keuangan/{id}', [KeuanganController::class, 'show'])->name('dashboard.keuangan.show');
 
-    Route::get('dashboard/inventaris', [App\Http\Controllers\Dashboard\InventarisController::class, 'index'])->name('dashboard.inventaris');
-    Route::post('dashboard/inventaris', [App\Http\Controllers\Dashboard\InventarisController::class, 'store'])->name('dashboard.inventaris.store');
-    Route::put('dashboard/inventaris/{id}', [App\Http\Controllers\Dashboard\InventarisController::class, 'update'])->name('dashboard.inventaris.update');
-    Route::delete('dashboard/inventaris/{id}', [App\Http\Controllers\Dashboard\InventarisController::class, 'destroy'])->name('dashboard.inventaris.destroy');
-    Route::get('dashboard/inventaris/{id}', [App\Http\Controllers\Dashboard\InventarisController::class, 'show'])->name('dashboard.inventaris.show');
+    Route::get('dashboard/inventaris', [InventarisController::class, 'index'])->name('dashboard.inventaris');
+    Route::post('dashboard/inventaris', [InventarisController::class, 'store'])->name('dashboard.inventaris.store');
+    Route::put('dashboard/inventaris/{id}', [InventarisController::class, 'update'])->name('dashboard.inventaris.update');
+    Route::delete('dashboard/inventaris/{id}', [InventarisController::class, 'destroy'])->name('dashboard.inventaris.destroy');
+    Route::get('dashboard/inventaris/{id}', [InventarisController::class, 'show'])->name('dashboard.inventaris.show');
 
-    Route::get('dashboard/dokumen', [App\Http\Controllers\Dashboard\DokumenController::class, 'index'])->name('dashboard.dokumen');
-    Route::post('dashboard/dokumen', [App\Http\Controllers\Dashboard\DokumenController::class, 'store'])->name('dashboard.dokumen.store');
-    Route::put('dashboard/dokumen/{id}', [App\Http\Controllers\Dashboard\DokumenController::class, 'update'])->name('dashboard.dokumen.update');
-    Route::delete('dashboard/dokumen/{id}', [App\Http\Controllers\Dashboard\DokumenController::class, 'destroy'])->name('dashboard.dokumen.destroy');
-    Route::get('dashboard/dokumen/{id}', [App\Http\Controllers\Dashboard\DokumenController::class, 'show'])->name('dashboard.dokumen.show');
-    Route::get('dashboard/dokumen/{id}/download', [App\Http\Controllers\Dashboard\DokumenController::class, 'download'])->name('dokumen.download');
+    Route::get('dashboard/dokumen', [DokumenController::class, 'index'])->name('dashboard.dokumen');
+    Route::post('dashboard/dokumen', [DokumenController::class, 'store'])->name('dashboard.dokumen.store');
+    Route::put('dashboard/dokumen/{id}', [DokumenController::class, 'update'])->name('dashboard.dokumen.update');
+    Route::delete('dashboard/dokumen/{id}', [DokumenController::class, 'destroy'])->name('dashboard.dokumen.destroy');
+    Route::get('dashboard/dokumen/{id}', [DokumenController::class, 'show'])->name('dashboard.dokumen.show');
+    Route::get('dashboard/dokumen/{id}/download', [DokumenController::class, 'download'])->name('dokumen.download');
+
+    Route::get('dashboard/rapat', [App\Http\Controllers\Dashboard\RapatController::class, 'index'])->name('dashboard.rapat');
+    Route::post('dashboard/rapat', [App\Http\Controllers\Dashboard\RapatController::class, 'store'])->name('dashboard.rapat.store');
+    Route::post('dashboard/rapat/presensi', [App\Http\Controllers\Dashboard\RapatController::class, 'presensi'])->name('dashboard.rapat.presensi');
+    Route::put('dashboard/rapat/{id}', [App\Http\Controllers\Dashboard\RapatController::class, 'update'])->name('dashboard.rapat.update');
+    Route::delete('dashboard/rapat/{id}', [App\Http\Controllers\Dashboard\RapatController::class, 'destroy'])->name('dashboard.rapat.destroy');
 });
 
 require __DIR__.'/settings.php';

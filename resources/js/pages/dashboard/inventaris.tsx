@@ -25,75 +25,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const inventarisData = [
-    {
-        id: 1,
-        nama: 'Sound System Portable',
-        kategori: 'Elektronik',
-        jumlah: 2,
-        kondisi: 'baik',
-        lokasi: 'Gudang Utama',
-        tanggal_beli: '2023-06-15',
-        harga: 2500000,
-        keterangan: 'Sound system untuk kegiatan outdoor',
-    },
-    {
-        id: 2,
-        nama: 'Tenda Pramuka',
-        kategori: 'Perlengkapan',
-        jumlah: 5,
-        kondisi: 'baik',
-        lokasi: 'Gudang Utama',
-        tanggal_beli: '2023-08-20',
-        harga: 1500000,
-        keterangan: 'Tenda untuk kegiatan camping',
-    },
-    {
-        id: 3,
-        nama: 'Proyektor',
-        kategori: 'Elektronik',
-        jumlah: 1,
-        kondisi: 'perlu_perbaikan',
-        lokasi: 'Ruang Rapat',
-        tanggal_beli: '2022-12-10',
-        harga: 3500000,
-        keterangan: 'Proyektor untuk presentasi, lampu mulai redup',
-    },
-    {
-        id: 4,
-        nama: 'Meja Lipat',
-        kategori: 'Furniture',
-        jumlah: 10,
-        kondisi: 'baik',
-        lokasi: 'Gudang Utama',
-        tanggal_beli: '2023-03-05',
-        harga: 2000000,
-        keterangan: 'Meja lipat untuk acara',
-    },
-    {
-        id: 5,
-        nama: 'Kursi Plastik',
-        kategori: 'Furniture',
-        jumlah: 50,
-        kondisi: 'baik',
-        lokasi: 'Gudang Utama',
-        tanggal_beli: '2023-04-12',
-        harga: 1250000,
-        keterangan: 'Kursi untuk acara umum',
-    },
-    {
-        id: 6,
-        nama: 'Generator Listrik',
-        kategori: 'Elektronik',
-        jumlah: 1,
-        kondisi: 'rusak',
-        lokasi: 'Gudang Utama',
-        tanggal_beli: '2022-09-18',
-        harga: 4000000,
-        keterangan: 'Generator rusak, perlu service besar',
-    },
-];
-
 const Inventaris = ({ inventarisData }: any) => {
     const [selectedInventaris, setSelectedInventaris] = useState<any>(null);
     const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -378,7 +309,7 @@ const Inventaris = ({ inventarisData }: any) => {
                                                         </AlertDialogHeader>
                                                         <AlertDialogFooter>
                                                             <AlertDialogCancel>Batal</AlertDialogCancel>
-                                                            <AlertDialogAction onClick={() => handleDelete(item.id)}>
+                                                        <AlertDialogAction className='bg-red-600 hover:bg-red-700 text-white' onClick={() => handleDelete(item.id)}>
                                                                 Ya, Hapus
                                                             </AlertDialogAction>
                                                         </AlertDialogFooter>

@@ -1,3 +1,4 @@
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -36,7 +37,7 @@ const Anggota = ({ anggota, seksi, jabatan }: any) => {
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [editingAnggota, setEditingAnggota] = useState<any>(null);
 
-    const { data, setData, post, processing, reset, errors } = useForm({
+    const { data, setData, post, delete: destroy, processing, reset, errors } = useForm({
         nama: '',
         email: '',
         telepon: '',
@@ -176,6 +177,19 @@ const Anggota = ({ anggota, seksi, jabatan }: any) => {
     const handleJabatanChange = (id_jabatan: number) => {
         setData({ ...data, id_jabatan, id_seksi: 0 });
     };
+
+    const handleDeleteAnggota = (id: number) => {
+        destroy(`/dashboard/anggota/${id}`, {
+            onSuccess: () => {
+                router.visit('/dashboard/anggota');
+                toast.success('Anggota berhasil dihapus');
+            },
+            onError: (errors) => {
+                console.error(errors);
+                toast.error('Gagal menghapus anggota');
+            },
+        });
+    }
 
     const handleSubmitForm = (e: React.FormEvent) => {
         e.preventDefault();
@@ -610,9 +624,27 @@ const Anggota = ({ anggota, seksi, jabatan }: any) => {
                                                     <Button variant="ghost" size="sm" onClick={() => handleEditAnggota(a)}>
                                                         <Edit className="h-4 w-4" />
                                                     </Button>
-                                                    <Button variant="ghost" size="sm" className="text-red-600">
-                                                        <Trash2 className="h-4 w-4" />
-                                                    </Button>
+                                                    <AlertDialog>
+                                                        <AlertDialogTrigger asChild>
+                                                            <Button variant="ghost" size="sm" className="text-red-600">
+                                                                <Trash2 className="h-4 w-4" />
+                                                            </Button>
+                                                        </AlertDialogTrigger>
+                                                        <AlertDialogContent>
+                                                            <AlertDialogHeader>
+                                                                <AlertDialogTitle>Hapus Pengumuman</AlertDialogTitle>
+                                                                <AlertDialogDescription>
+                                                                    Apakah Anda yakin ingin menghapus anggota <strong>{a.nama}</strong>? Tindakan ini tidak dapat dibatalkan.
+                                                                </AlertDialogDescription>
+                                                            </AlertDialogHeader>
+                                                            <AlertDialogFooter>
+                                                                <AlertDialogCancel>Batal</AlertDialogCancel>
+                                                                <AlertDialogAction onClick={() => handleDeleteAnggota(a.id)} className='bg-red-600 hover:bg-red-700 text-white'>
+                                                                    Ya, Hapus
+                                                                </AlertDialogAction>
+                                                            </AlertDialogFooter>
+                                                        </AlertDialogContent>
+                                                    </AlertDialog>
                                                 </div>
                                             </TableCell>
                                         </TableRow>

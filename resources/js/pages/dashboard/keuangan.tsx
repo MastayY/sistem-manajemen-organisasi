@@ -325,7 +325,7 @@ const Keuangan = ({ keuanganData }: any) => {
                                                         </AlertDialogHeader>
                                                         <AlertDialogFooter>
                                                             <AlertDialogCancel>Batal</AlertDialogCancel>
-                                                            <AlertDialogAction onClick={() => handleDelete(item.id)}>
+                                                            <AlertDialogAction className='bg-red-600 hover:bg-red-700 text-white' onClick={() => handleDelete(item.id)}>
                                                                 Ya, Hapus
                                                             </AlertDialogAction>
                                                         </AlertDialogFooter>

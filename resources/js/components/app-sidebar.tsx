@@ -2,7 +2,7 @@ import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { Link } from '@inertiajs/react';
-import { Calendar, DollarSign, FileText, LayoutGrid, Megaphone, Newspaper, Package, Settings, Users } from 'lucide-react';
+import { Calendar, DollarSign, FileText, LayoutGrid, Megaphone, Newspaper, Package, Settings, UserCheck, Users } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems = [
@@ -18,6 +18,11 @@ const mainNavItems = [
                 title: 'Agenda',
                 url: '/dashboard/agenda',
                 icon: Calendar,
+            },
+            {
+                title: 'Rapat',
+                url: '/dashboard/rapat',
+                icon: UserCheck,
             },
             {
                 title: 'Pengumuman',
@@ -56,16 +61,16 @@ const mainNavItems = [
             },
         ],
     },
-    {
-        title: 'Pengaturan',
-        items: [
-            {
-                title: 'Profile Setting',
-                url: '/settings',
-                icon: Settings,
-            },
-        ],
-    },
+    // {
+    //     title: 'Pengaturan',
+    //     items: [
+    //         {
+    //             title: 'Profile Setting',
+    //             url: '/settings',
+    //             icon: Settings,
+    //         },
+    //     ],
+    // },
 ];
 
 export function AppSidebar() {

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->text('alamat');
-            $table->string('telepon');
+            $table->string('telepon');  
             $table->string('email')->unique();
             $table->string('jenis_kelamin');
             $table->string('status'); // "Aktif/Tidak Aktif"

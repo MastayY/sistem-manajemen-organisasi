@@ -478,7 +478,7 @@ const Aktivitas = ({ aktivitasData }: any) => {
                                                                 </AlertDialogHeader>
                                                                 <AlertDialogFooter>
                                                                     <AlertDialogCancel>Batal</AlertDialogCancel>
-                                                                    <AlertDialogAction onClick={() => handleDeleteArtikel(aktivitas.id)}>
+                                                                    <AlertDialogAction className='bg-red-600 hover:bg-red-700 text-white' onClick={() => handleDeleteArtikel(aktivitas.id)}>
                                                                         Ya, Hapus
                                                                     </AlertDialogAction>
                                                                 </AlertDialogFooter>

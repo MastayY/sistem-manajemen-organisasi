@@ -514,7 +514,7 @@ const Dokumen = ({ dokumenData }: any) => {
                                                                 </AlertDialogHeader>
                                                                 <AlertDialogFooter>
                                                                     <AlertDialogCancel>Batal</AlertDialogCancel>
-                                                                    <AlertDialogAction onClick={() => handleDeleteDokumen(dokumen.id_dokumen)}>
+                                                                    <AlertDialogAction className='bg-red-600 hover:bg-red-700 text-white' onClick={() => handleDeleteDokumen(dokumen.id_dokumen)}>
                                                                         Ya, Hapus
                                                                     </AlertDialogAction>
                                                                 </AlertDialogFooter>
