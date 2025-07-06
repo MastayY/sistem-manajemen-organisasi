@@ -47,8 +47,10 @@ class ArtikelBeritaController extends Controller
 
     public function show($id)
     {
-        $artikel = Artikel::findOrFail($id);
-        return response()->json($artikel);
+        $artikel = Artikel::with(['penulis'])->findOrFail($id);
+        return Inertia::render('aktivitas-detail', [
+            'artikel' => $artikel,
+        ]);
     }
 
     public function update(Request $request, $id)

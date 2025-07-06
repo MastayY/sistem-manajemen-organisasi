@@ -82,6 +82,9 @@ const Agenda = ({ kegiatan }: any) => {
                 setIsCreateOpen(false);
                 router.visit('/dashboard/agenda');
             },
+            onError: (errors: any) => {
+                console.error('Error creating agenda:', errors);
+            },
         });
     };
 
@@ -103,6 +106,9 @@ const Agenda = ({ kegiatan }: any) => {
                 setIsEditOpen(false);
                 resetEdit();
                 router.visit('/dashboard/agenda');
+            },
+            onError: (errors: any) => {
+                console.error('Error updating agenda:', errors);
             },
         });
     };

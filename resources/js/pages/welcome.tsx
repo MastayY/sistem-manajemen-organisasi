@@ -5,40 +5,11 @@ import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { Calendar1Icon, Clock, MapPin, SendHorizonal } from 'lucide-react';
 import Card from '@/components/fragments/Card';
+import Countdown from '@/components/elements/Countdown';
 
-const articles = [
-    {
-        id: 1,
-        title: 'Pelatihan Wirausaha Remaja',
-        date: '31 Februari 2025',
-        image: './fotbar.jpeg',
-        description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere totam et est recusandae earum minima natus voluptate impedit at aut...',
-        type: 'Berita',
-    },
-    {
-        id: 2,
-        title: 'Pelatihan Wirausaha Remaja',
-        date: '31 Februari 2025',
-        image: './fotbar.jpeg',
-        description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere totam et est recusandae earum minima natus voluptate impedit at aut...',
-        type: 'Artikel',
-    },
-    {
-        id: 3,
-        title: 'Pelatihan Wirausaha Remaja',
-        date: '31 Februari 2025',
-        image: './fotbar.jpeg',
-        description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere totam et est recusandae earum minima natus voluptate impedit at aut...',
-        type: 'Berita',
-    },
-
-]
-
-export default function Welcome() {
+export default function Welcome({ articles, agenda }: { articles: any[]; agenda: any[] }) {
     const { auth } = usePage<SharedData>().props;
+    
 
     return (
         <>
@@ -135,87 +106,50 @@ export default function Welcome() {
 
                         {/* card container */}
                         <div className="mt-8 grid grid-cols-1 place-items-center gap-5 md:grid-cols-3">
-                            {/* card */}
-                            <div className="col-span-1 max-w-sm">
-                                <div className="relative">
-                                    <img src="./fotbar.jpeg" alt="" className="h-[220px] w-[350px] rounded-md object-cover shadow-md" />
-                                    <p className="bg-accent absolute top-0 left-0 flex items-center gap-2 rounded-tl-md rounded-br-lg px-3 py-1 text-xs font-bold">
-                                        <Calendar1Icon className="w-4" />
-                                        31 Februari 2025
-                                    </p>
+                            {
+                                agenda.map((event) => {
+                                    {console.log(event)}
+                                    return (
+                                        <div className="col-span-1 max-w-sm">
+                                            <div className="relative">
+                                                <img src={
+                                                    'storage/' + event.image
+                                                } alt="" className="h-[180px] w-[350px] rounded-md object-cover shadow-md" />
+                                                <p className="bg-accent absolute top-0 left-0 flex items-center gap-2 rounded-tl-md rounded-br-lg px-3 py-1 text-xs font-bold">
+                                                    <Calendar1Icon className="w-4" />
+                                                    {new Date(event.date).toLocaleDateString('id-ID', {
+                                                        day: 'numeric',
+                                                        month: 'long',
+                                                        year: 'numeric',
+                                                    })}
+                                                </p>
 
-                                    {/* Countdown */}
-                                    <div className="absolute bottom-3 left-3 flex items-center gap-1">
-                                        <div className="bg-neutral rounded-md px-3 py-2 text-center">
-                                            <p className="text-danger text-lg font-bold">24</p>
-                                            <p className="text-xs">Hari</p>
+                                                {/* Countdown hanya untuk data paling awal */}
+                                                {
+                                                    event.id_kegiatan === agenda[0].id_kegiatan && (
+                                                        <Countdown targetDateTime={`${event.date}T${event.waktu}`} />
+                                                    )
+                                                }
+                                            </div>
+                                            <h3 className="pt-3 text-lg font-semibold line-clamp-2">{event.title}</h3>
+                                            <div className="flex max-w-[350px] items-center gap-2 text-sm font-light">
+                                                <MapPin className="text-danger inline-block w-3" />
+                                                <p className="text-xs">{event.lokasi}</p>
+                                            </div>
+                                            <div className="flex max-w-[350px] items-center gap-2 text-sm font-light">
+                                                <Clock className="text-danger inline-block w-3" />
+                                                <p className='text-xs'>{new Date(event.date + 'T' + event.waktu).toLocaleString('id-ID', {
+                                                    day: 'numeric',
+                                                    month: 'long',
+                                                    year: 'numeric',
+                                                    hour: '2-digit',
+                                                    minute: '2-digit',
+                                                })} WIB</p>
+                                            </div>
                                         </div>
-                                        <div className="bg-neutral rounded-md px-3 py-2 text-center">
-                                            <p className="text-danger text-lg font-bold">24</p>
-                                            <p className="text-xs">Jam</p>
-                                        </div>
-                                        <div className="bg-neutral rounded-md px-3 py-2 text-center">
-                                            <p className="text-danger text-lg font-bold">24</p>
-                                            <p className="text-xs">Menit</p>
-                                        </div>
-                                        <div className="bg-neutral rounded-md px-3 py-2 text-center">
-                                            <p className="text-danger text-lg font-bold">24</p>
-                                            <p className="text-xs">Detik</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h3 className="pt-3 text-lg font-semibold">Pelatihan Wirausaha Remaja</h3>
-                                <div className="flex max-w-[350px] items-center gap-2 text-sm font-light">
-                                    <MapPin className="text-danger inline-block w-3" />
-                                    <p className="text-xxs">Gedung Kesenian Dukuh Mulwo</p>
-                                </div>
-                                <div className="flex max-w-[350px] items-center gap-2 text-sm font-light">
-                                    <Clock className="text-danger inline-block w-3" />
-                                    <p className="text-xxs">15.30 - 17.30 WIB</p>
-                                </div>
-                            </div>
-
-                            <div className="col-span-1 max-w-sm">
-                                <div className="relative">
-                                    <img src="./fotbar.jpeg" alt="" className="h-[220px] w-[350px] rounded-md object-cover shadow-md" />
-                                    <p className="bg-accent absolute top-0 left-0 flex items-center gap-2 rounded-tl-md rounded-br-lg px-3 py-1 text-xs font-bold">
-                                        <Calendar1Icon className="w-4" />
-                                        31 Februari 2025
-                                    </p>
-
-                                    {/* Countdown */}
-                                </div>
-                                <h3 className="pt-3 text-lg font-semibold">Donor Darah Bersama PMI</h3>
-                                <div className="flex max-w-[350px] items-center gap-2 text-sm font-light">
-                                    <MapPin className="text-danger inline-block w-3" />
-                                    <p className="text-xxs">Gedung Kesenian Dukuh Mulwo</p>
-                                </div>
-                                <div className="flex max-w-[350px] items-center gap-2 text-sm font-light">
-                                    <Clock className="text-danger inline-block w-3" />
-                                    <p className="text-xxs">15.30 - 17.30 WIB</p>
-                                </div>
-                            </div>
-
-                            <div className="col-span-1 max-w-sm">
-                                <div className="relative">
-                                    <img src="./fotbar.jpeg" alt="" className="h-[220px] w-[350px] rounded-md object-cover shadow-md" />
-                                    <p className="bg-accent absolute top-0 left-0 flex items-center gap-2 rounded-tl-md rounded-br-lg px-3 py-1 text-xs font-bold">
-                                        <Calendar1Icon className="w-4" />
-                                        31 Februari 2025
-                                    </p>
-
-                                    {/* Countdown */}
-                                </div>
-                                <h3 className="pt-3 text-lg font-semibold">Pelatihan Wirausaha Remaja</h3>
-                                <div className="flex max-w-[350px] items-center gap-2 text-sm font-light">
-                                    <MapPin className="text-danger inline-block w-3" />
-                                    <p className="text-xxs">Gedung Kesenian Dukuh Mulwo</p>
-                                </div>
-                                <div className="flex max-w-[350px] items-center gap-2 text-sm font-light">
-                                    <Clock className="text-danger inline-block w-3" />
-                                    <p className="text-xxs">15.30 - 17.30 WIB</p>
-                                </div>
-                            </div>
+                                    )
+                                })
+                            }
                         </div>
                     </section>
 
@@ -232,10 +166,12 @@ export default function Welcome() {
                                 articles.map((article) => (
                                     <Card
                                         key={article.id}
+                                        id={article.id}
                                         title={article.title}
                                         date={article.date}
                                         description={article.description}
                                         type={article.type}
+                                        image={article.image} // Assuming the image is a URL or path
                                     />
                                 ))
                             }

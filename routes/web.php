@@ -7,18 +7,17 @@ use App\Http\Controllers\Dashboard\PengumumanController;
 use App\Http\Controllers\Dashboard\AnggotaController;
 use App\Http\Controllers\Dashboard\ArtikelBeritaController;
 use App\Http\Controllers\Dashboard\KeuanganController;
+use App\Http\Controllers\KepengurusanController;
+use App\Http\Controllers\ArtikelBeritaLandingController;
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+Route::get('/', [App\Http\Controllers\LandingController::class, 'index'])->name('home');
 
-Route::get('/kepengurusan', function () {
-    return Inertia::render('kepengurusan');
-})->name('kepengurusan');
+Route::get('/kepengurusan', [KepengurusanController::class, 'index'])->name('kepengurusan');
 
-Route::get('/aktivitas', function () {
-    return Inertia::render('aktivitas');
-})->name('aktivitas');
+Route::get('/aktivitas', [ArtikelBeritaLandingController::class, 'index'])->name('aktivitas');
+
+// detail aktivitas
+Route::get('/aktivitas/{id}', [ArtikelBeritaController::class, 'show'])->name('aktivitas.show');
 
 Route::get('/kontak', function () {
     return Inertia::render('kontak');
@@ -27,9 +26,7 @@ Route::get('/kontak', function () {
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard/index');
-    })->name('dashboard');
+    Route::get('dashboard', [App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('dashboard/agenda', [KegiatanController::class, 'index'])->name('dashboard.agenda');
     Route::get('dashboard/agenda/create', [KegiatanController::class, 'create'])->name('dashboard.agenda.create');

@@ -19,6 +19,7 @@ use PhpOffice\PhpWord\Writer\RTF;
 use PhpOffice\PhpWord\Writer\ODText;
 use PhpOffice\PhpWord\Writer\PDF;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class DokumenController extends Controller
 {
@@ -41,28 +42,27 @@ class DokumenController extends Controller
         $data['status'] = "selesai";
 
         if ($request->jenis === 'notulensi') {
-            $phpWord = new PhpWord();
-            $phpWord->setDefaultFontName('Times New Roman');
-            $phpWord->setDefaultFontSize(12);
-            $section = $phpWord->addSection([
-                'paperSize' => 'A4',
-                'orientation' => 'portrait'
-            ]);
-            $section->addText('Notulensi Rapat');
-            $section->addText("Topik: {$request->topik}");
-            $section->addText("Tanggal: {$request->tanggal}");
-            $section->addText("Isi: {$request->isi}");
-            $section->addText("Pimpinan Rapat: {$request->pimpinan_rapat}");
-            $section->addText("Notulis: {$request->notulis}");
-            $section->addText("Peserta: {$request->peserta}");
-            $section->addText("Agenda: {$request->agenda}");
-            $section->addText("Pembahasan: {$request->pembahasan}");
-            $section->addText("Keputusan: {$request->keputusan}");
-            $section->addText("Tindak Lanjut: {$request->tindak_lanjut}");
+            $templatePath = storage_path('app/templates/TEMPLATE_NOTULENSI.docx');
+            $templateProcessor = new TemplateProcessor($templatePath);
 
+            // Ganti variabel dari template
+            $templateProcessor->setValue('judul', $request->judul);
+            $templateProcessor->setValue('tanggal', Carbon::parse($request->tanggal)->translatedFormat('d F Y'));
+            $templateProcessor->setValue('waktu', $request->waktu);
+            $templateProcessor->setValue('lokasi', $request->tempat);
+            $templateProcessor->setValue('pimpinan', $request->pimpinan_rapat);
+            $templateProcessor->setValue('notulis', $request->notulis ?? auth()->user()->name);
+            $templateProcessor->setValue('peserta', $request->peserta);
+            $templateProcessor->setValue('agenda', $request->agenda);
+            $templateProcessor->setValue('pembahasan', $request->pembahasan);
+            $templateProcessor->setValue('keputusan', $request->keputusan);
+            $templateProcessor->setValue('tindak_lanjut', $request->tindak_lanjut);
+
+
+            // Simpan hasil generate
             $fileName = 'notulensi_' . now()->timestamp . '.docx';
             $savePath = storage_path("app/public/dokumen/{$fileName}");
-            $phpWord->save($savePath, 'Word2007');
+            $templateProcessor->saveAs($savePath);
         }
 
         if ($request->jenis === 'lelayu') {
@@ -132,26 +132,26 @@ class DokumenController extends Controller
         $fileName = null;
 
         if ($request->jenis === 'notulensi') {
-            $phpWord = new PhpWord();
-            $phpWord->setDefaultFontName('Times New Roman');
-            $phpWord->setDefaultFontSize(12);
+            $templatePath = storage_path('app/templates/TEMPLATE_NOTULENSI.docx');
+            $templateProcessor = new TemplateProcessor($templatePath);
 
-            $section = $phpWord->addSection(['paperSize' => 'A4', 'orientation' => 'portrait']);
-            $section->addText('Notulensi Rapat');
-            $section->addText("Topik: {$request->topik}");
-            $section->addText("Tanggal: {$request->tanggal}");
-            $section->addText("Isi: {$request->isi}");
-            $section->addText("Pimpinan Rapat: {$request->pimpinan_rapat}");
-            $section->addText("Notulis: {$request->notulis}");
-            $section->addText("Peserta: {$request->peserta}");
-            $section->addText("Agenda: {$request->agenda}");
-            $section->addText("Pembahasan: {$request->pembahasan}");
-            $section->addText("Keputusan: {$request->keputusan}");
-            $section->addText("Tindak Lanjut: {$request->tindak_lanjut}");
+            // Ganti variabel dari template
+            $templateProcessor->setValue('judul', $request->judul);
+            $templateProcessor->setValue('tanggal', Carbon::parse($request->tanggal)->translatedFormat('d F Y'));
+            $templateProcessor->setValue('waktu', $request->waktu);
+            $templateProcessor->setValue('lokasi', $request->tempat);
+            $templateProcessor->setValue('pimpinan', $request->pimpinan_rapat);
+            $templateProcessor->setValue('notulis', $request->notulis ?? auth()->user()->name);
+            $templateProcessor->setValue('peserta', $request->peserta);
+            $templateProcessor->setValue('agenda', $request->agenda);
+            $templateProcessor->setValue('pembahasan', $request->pembahasan);
+            $templateProcessor->setValue('keputusan', $request->keputusan);
+            $templateProcessor->setValue('tindak_lanjut', $request->tindak_lanjut);
 
+            // Simpan hasil generate
             $fileName = 'notulensi_' . now()->timestamp . '.docx';
             $savePath = storage_path("app/public/dokumen/{$fileName}");
-            $phpWord->save($savePath, 'Word2007');
+            $templateProcessor->saveAs($savePath);
         }
 
         if ($request->jenis === 'lelayu') {

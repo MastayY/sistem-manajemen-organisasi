@@ -62,7 +62,7 @@ class KegiatanController extends Controller
         $request->validate([
             'nama_kegiatan' => 'sometimes|required|string',
             'tanggal' => 'sometimes|required|date',
-            'waktu' => 'nullable|date_format:H:i:s',
+            'waktu' => 'nullable|date_format:H:i',
             'lokasi' => 'sometimes|required|string',
             'status' => 'sometimes|required|string',
             'image' => 'nullable|image|max:2048',
