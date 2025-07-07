@@ -71,7 +71,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                 required
                                 value={data.email}
                                 onChange={(e) => setData('email', e.target.value)}
-                                className="block w-full appearance-none rounded-md border border-gray-300 py-2 pr-3 pl-10 placeholder-gray-400 focus:border-red-500 focus:ring-red-500 focus:outline-none sm:text-sm"
+                                className="block w-full appearance-none rounded-md border border-gray-300 py-2 pr-3 pl-10 placeholder-gray-400 focus:border-red-500 focus:ring-red-500 focus:outline-none sm:text-sm text-black"
                                 placeholder="Masukkan email Anda"
                             />
                         </div>
