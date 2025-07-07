@@ -2,7 +2,7 @@
 
 Website ini adalah sistem manajemen organisasi untuk Karang Taruna yang dibangun menggunakan **Laravel** dan **ReactJS** dengan bantuan **Inertia.js**. Proyek ini bertujuan untuk mempermudah pengelolaan organisasi serta meningkatkan branding organisasi melalui berbagai fitur yang disediakan.
 
-## Fitur Utama (Akan Dikembangkan)
+## Fitur Utama
 1. **Sistem Absensi Rapat**  
     Mempermudah pencatatan kehadiran anggota dalam setiap rapat.
 
@@ -22,12 +22,13 @@ Website ini adalah sistem manajemen organisasi untuk Karang Taruna yang dibangun
     Membantu organisasi dalam mempublikasikan artikel dan berita untuk branding.
 
 ## Status Proyek
-Saat ini proyek masih dalam tahap **pengembangan awal**. Fokus utama saat ini adalah membangun **landing page** untuk memperkenalkan sistem ini kepada pengguna.
+Proyek telah selesai versi 1 dan siap digunakan.
 
 ## Tech Stack
 - **Backend**: Laravel  
 - **Frontend**: ReactJS  
 - **Middleware**: Inertia.js  
+- **Whatsapp API**: Fonnte
 
 ## Cara Menjalankan Proyek (Development)
 1. Clone repository ini ke komputer Anda.
@@ -36,7 +37,17 @@ Saat ini proyek masih dalam tahap **pengembangan awal**. Fokus utama saat ini ad
     composer install
     npm install
     ```
-3. Konfigurasi file `.env` untuk koneksi database dan pengaturan lainnya.
+3. Konfigurasi file `.env` 
+    - Isi `FONNTE_TOKEN` dengan token device dari FONNTE
+
+4. Generate Key
+    ```bash
+    php artisan key:generate
+    ```
+5. Link storage
+    ```bash
+    php artisan storage:link
+    ```
 4. Jalankan server Laravel:
     ```bash
     php artisan serve
@@ -45,10 +56,7 @@ Saat ini proyek masih dalam tahap **pengembangan awal**. Fokus utama saat ini ad
     ```bash
     npm run dev
     ```
-6. Akses aplikasi melalui browser di `http://localhost:8000`.
+6. Akses aplikasi melalui browser di `http://127.0.0.1:8000`.
 
 ## Kontribusi
 Jika Anda ingin berkontribusi pada proyek ini, silakan buat pull request atau laporkan masalah melalui [Issues](#).
-
-## Lisensi
-Proyek ini menggunakan lisensi **MIT**. Silakan lihat file `LICENSE` untuk informasi lebih lanjut.
